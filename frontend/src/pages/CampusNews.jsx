@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import API_URL from '../config/api'
 
 function CampusNews({ token, onLogout }) {
   const navigate = useNavigate()
@@ -54,7 +55,7 @@ function CampusNews({ token, onLogout }) {
 
   const fetchNews = async () => {
     try {
-      const response = await axios.get('/api/news')
+      const response = await axios.get(`${API_URL}/news`)
       if (response.data.success) {
         console.log('News fetched:', response.data.news);
         // Check if news items have _id
@@ -85,7 +86,7 @@ function CampusNews({ token, onLogout }) {
 
     try {
       console.log('Attempting to delete news with ID:', newsId);
-      const response = await axios.delete(`/api/news/${newsId}`)
+      const response = await axios.delete(`${API_URL}/news/${newsId}`)
       console.log('Delete response:', response.data);
       if (response.data.success) {
         // Refresh news list

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
+import API_URL from '../config/api'
 
 function NewsAdmin({ token, onLogout }) {
   const navigate = useNavigate()
@@ -71,7 +72,7 @@ function NewsAdmin({ token, onLogout }) {
   // Load news item for editing
   const loadNewsForEdit = async (newsId) => {
     try {
-      const response = await axios.get(`/api/news/${newsId}`)
+      const response = await axios.get(`${API_URL}/news/${newsId}`)
       if (response.data.success) {
         const newsItem = response.data.news
         setFormData({
@@ -92,7 +93,7 @@ function NewsAdmin({ token, onLogout }) {
   // Fetch all news created by this admin
   const fetchNews = async () => {
     try {
-      const response = await axios.get(`/api/news/admin/${userEmail}`)
+      const response = await axios.get(`${API_URL}/news/admin/${userEmail}`)
       if (response.data.success) {
         setNews(response.data.news)
       }
@@ -195,7 +196,7 @@ function NewsAdmin({ token, onLogout }) {
       if (editingNewsId) {
         // Update existing news
         const response = await axios.put(
-          `/api/news/${editingNewsId}`,
+          `${API_URL}/news/${editingNewsId}`,
           newsData
         )
         if (response.data.success) {
@@ -213,7 +214,7 @@ function NewsAdmin({ token, onLogout }) {
         }
       } else {
         // Create new news
-        const response = await axios.post('/api/news', newsData)
+        const response = await axios.post(`${API_URL}/news`, newsData)
         if (response.data.success) {
           setSuccess('News created successfully!')
           setFormData({
@@ -242,7 +243,7 @@ function NewsAdmin({ token, onLogout }) {
     if (!window.confirm('Are you sure you want to delete this news?')) return
 
     try {
-      const response = await axios.delete(`/api/news/${newsId}`)
+      const response = await axios.delete(`${API_URL}/news/${newsId}`)
       if (response.data.success) {
         setSuccess('News deleted successfully!')
         setEditingNewsId(null)

@@ -6,6 +6,10 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import SearchBar from '../components/SearchBar'
 // Import toast for professional notifications
 import toast from 'react-hot-toast'
+// Import API configuration
+import API_URL from '../config/api'
+// Import API fetch helper
+import apiFetch from '../utils/apiFetch'
 
 function Profile({ token, onLogout }) {
   // useNavigate hook to navigate to different pages
@@ -278,8 +282,7 @@ function Profile({ token, onLogout }) {
         } else {
           // Fetch from backend if not in localStorage
           try {
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-            const response = await fetch(`${apiUrl}/api/auth/user/${encodeURIComponent(viewingUserEmail)}`);
+            const response = await fetch(`${API_URL}/auth/user/${encodeURIComponent(viewingUserEmail)}`);
             const data = await response.json();
             
             // ✅ DEBUG: Log the received data

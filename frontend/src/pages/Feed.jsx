@@ -10,6 +10,10 @@ import SearchBar from '../components/SearchBar'
 import NotificationBell from '../components/NotificationBell'
 // Import toast for professional notifications
 import toast from 'react-hot-toast'
+// Import API configuration
+import API_URL from '../config/api'
+// Import API fetch helper
+import apiFetch from '../utils/apiFetch'
 
 function Feed({ token, onLogout }) {
   // useNavigate hook to navigate to different pages
@@ -125,7 +129,7 @@ function Feed({ token, onLogout }) {
     const fetchPosts = async () => {
       try {
         // Fetch all posts from backend
-        const response = await fetch('/api/posts');
+        const response = await apiFetch('/posts');
         const data = await response.json();
 
         if (data.success && data.posts.length > 0) {
@@ -257,7 +261,7 @@ function Feed({ token, onLogout }) {
   useEffect(() => {
     const fetchUserProfileImage = async () => {
       try {
-        const response = await fetch('/api/auth/profile', {
+        const response = await apiFetch('/auth/profile', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -296,7 +300,7 @@ function Feed({ token, onLogout }) {
       
       for (const email of emailsToFetch) {
         try {
-          const response = await fetch(`/api/auth/profile/${encodeURIComponent(email)}`);
+          const response = await apiFetch(`/auth/profile/${encodeURIComponent(email)}`);
           const data = await response.json();
           
           if (data.success && data.user?.profileImage) {
@@ -319,7 +323,7 @@ function Feed({ token, onLogout }) {
   const fetchConversations = async () => {
     try {
       setLoadingMessages(true)
-      const response = await fetch('/api/messages/conversations', {
+      const response = await apiFetch('/messages/conversations', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -383,7 +387,7 @@ function Feed({ token, onLogout }) {
   // Function to refresh/reload comments for a post
   const refreshComments = async (postId) => {
     try {
-      const response = await fetch(`/api/comments/${postId}`)
+      const response = await apiFetch(`/comments/${postId}`)
       const data = await response.json()
       
       if (data.success) {
@@ -417,7 +421,7 @@ function Feed({ token, onLogout }) {
       console.log('Adding comment:', { postId, text: commentText, author: userName, userEmail })
 
       // Send comment to backend API
-      const response = await fetch('/api/comments', {
+      const response = await apiFetch('/comments', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -442,7 +446,7 @@ function Feed({ token, onLogout }) {
         }))
 
         // Refetch comments from backend to show the new comment
-        const commentsResponse = await fetch(`/api/comments/${postId}`)
+        const commentsResponse = await apiFetch(`/comments/${postId}`)
         const commentsData = await commentsResponse.json()
 
         if (commentsData.success) {
@@ -503,7 +507,7 @@ function Feed({ token, onLogout }) {
 
     try {
       // Send like update to backend API
-      const response = await fetch(`/api/posts/${postId}/like`, {
+      const response = await apiFetch(`/posts/${postId}/like`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -575,7 +579,7 @@ function Feed({ token, onLogout }) {
 
     try {
       // Delete from backend API
-      const response = await fetch(`/api/posts/${postId}`, {
+      const response = await apiFetch(`/posts/${postId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -612,7 +616,7 @@ function Feed({ token, onLogout }) {
       const post = posts.find(p => p.id === postId);
 
       // Update on backend API
-      const response = await fetch(`/api/posts/${postId}`, {
+      const response = await apiFetch(`/posts/${postId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

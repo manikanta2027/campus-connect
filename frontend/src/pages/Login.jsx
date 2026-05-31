@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 // Import toast for professional notifications
 import toast from 'react-hot-toast'
+// Import API configuration
+import API_URL from '../config/api'
 
 function Login({ onLogin }) {
   // useNavigate hook to navigate to different pages
@@ -44,7 +46,7 @@ function Login({ onLogin }) {
 
     try {
       // Send login request to backend
-      const response = await axios.post('/api/auth/login', formData)
+      const response = await axios.post(`${API_URL}/auth/login`, formData)
 
       // Log the response for debugging
       console.log('Login response:', response.data);

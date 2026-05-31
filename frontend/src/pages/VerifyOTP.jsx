@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 // Import axios to make API requests
 import axios from 'axios'
+// Import API configuration
+import API_URL from '../config/api'
 
 function VerifyOTP() {
   // useNavigate hook to navigate to different pages
@@ -41,7 +43,7 @@ function VerifyOTP() {
 
     try {
       // Send OTP verification request to backend
-      const response = await axios.post('/api/auth/verify-otp', {
+      const response = await axios.post(`${API_URL}/auth/verify-otp`, {
         email,
         otp,
       })
@@ -145,7 +147,7 @@ function VerifyOTP() {
             onClick={async () => {
               // Resend OTP by calling send-otp endpoint
               try {
-                const response = await axios.post('/api/auth/send-otp', {
+                const response = await axios.post(`${API_URL}/auth/send-otp`, {
                   email,
                 })
                 if (response.data.otp) {

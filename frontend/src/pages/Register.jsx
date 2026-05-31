@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 // Import toast for professional notifications
 import toast from 'react-hot-toast'
+// Import API configuration
+import API_URL from '../config/api'
 
 function Register() {
   // useNavigate hook to navigate to different pages
@@ -110,7 +112,7 @@ function Register() {
 
     try {
       // Send registration request to backend
-      const response = await axios.post('/api/auth/register', formData)
+      const response = await axios.post(`${API_URL}/auth/register`, formData)
 
       // If registration successful, redirect to login page
       if (response.data.success) {

@@ -50,8 +50,8 @@ function Search({ token, onLogout }) {
   // ✅ OPTIMIZED: Search students using backend API (skills, name, email, department)
   const searchStudents = async (query) => {
     try {
-      // Get API URL from environment or use default
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000'
+      // Get API URL from environment
+      const apiUrl = API_URL;
 
       // Extract email from token (JWT payload is base64 encoded)
       let userEmail = null;

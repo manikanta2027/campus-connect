@@ -500,7 +500,7 @@ function AdminDashboard({ token, onLogout }) {
         const contentType = response.headers.get('content-type')
         if (!contentType || !contentType.includes('application/json')) {
           console.error('Server returned non-JSON response:', response.status)
-          alert('Error: Backend server is not responding properly. Make sure the backend server is running on http://localhost:5000')
+          alert('Error: Backend server is not responding properly. Please try again later.')
           return
         }
 

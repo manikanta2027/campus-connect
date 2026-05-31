@@ -8,6 +8,8 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 // Import validation utilities
 import { validatePassword, validatePasswordMatch, getPasswordStrengthColor } from '../utils/validation'
+// Import API configuration
+import API_URL from '../config/api'
 
 function ResetPassword() {
   // Get reset token from URL parameter
@@ -117,11 +119,9 @@ function ResetPassword() {
     setLoading(true)
 
     try {
-      // Get API URL from environment or use default
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000'
-
+      // Get API URL from environment
       // Send reset password request to backend
-      const response = await axios.post(`${apiUrl}/api/auth/reset-password`, {
+      const response = await axios.post(`${API_URL}/auth/reset-password`, {
         resetToken: token,
         newPassword,
       }, {
