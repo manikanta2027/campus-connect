@@ -96,7 +96,7 @@ function Search({ token, onLogout }) {
       // First try: Search by tag using the new backend endpoint
       console.log(`🔍 Searching posts by tag: ${query}`)
       const tagResponse = await fetch(
-        `http://localhost:8000/api/posts/search/tag/${encodeURIComponent(query)}`,
+        `${API_URL}/posts/search/tag/${encodeURIComponent(query)}`,
         {
           method: 'GET',
           headers: {
@@ -114,7 +114,7 @@ function Search({ token, onLogout }) {
 
       // Fallback: If no tag results, fetch all posts and filter by content/author
       console.log(`📝 No tag match. Searching by content...`)
-      const allPostsResponse = await fetch('http://localhost:8000/api/posts', {
+      const allPostsResponse = await fetch(`${API_URL}/posts`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -171,7 +171,7 @@ function Search({ token, onLogout }) {
   const searchUserByRegisterNumber = async (registerNumber) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/auth/user-by-register/${registerNumber}`,
+        `${API_URL}/auth/user-by-register/${registerNumber}`,
         {
           method: 'GET',
           headers: {

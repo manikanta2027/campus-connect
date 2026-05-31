@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 // Import SearchBar component
 import SearchBar from '../components/SearchBar'
+// Import API configuration
+import API_URL from '../config/api'
 
 function AdminDashboard({ token, onLogout }) {
   // useNavigate hook to navigate to different pages
@@ -119,7 +121,7 @@ function AdminDashboard({ token, onLogout }) {
   // Fetch all mentors from backend
   const fetchMentors = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/mentors', {
+      const response = await fetch(`${API_URL}/mentors`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -140,7 +142,7 @@ function AdminDashboard({ token, onLogout }) {
   // Fetch all students (4th year candidates for mentors)
   const fetchAllStudents = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/auth/all-students', {
+      const response = await fetch(`${API_URL}/auth/all-students`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -168,7 +170,7 @@ function AdminDashboard({ token, onLogout }) {
   // Add a mentor
   const handleAddMentor = async (userId) => {
     try {
-      const response = await fetch('http://localhost:8000/api/mentors/add', {
+      const response = await fetch(`${API_URL}/mentors/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -196,7 +198,7 @@ function AdminDashboard({ token, onLogout }) {
   const handleRemoveMentor = async (userId) => {
     if (window.confirm('Are you sure you want to remove this mentor?')) {
       try {
-        const response = await fetch('http://localhost:8000/api/mentors/remove', {
+        const response = await fetch(`${API_URL}/mentors/remove`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

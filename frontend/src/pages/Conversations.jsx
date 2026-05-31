@@ -43,7 +43,7 @@ function Conversations({ token, onLogout }) {
     try {
       setError('')
 
-      const response = await fetch('http://localhost:8000/api/messages/conversations', {
+      const response = await fetch(`${API_URL}/messages/conversations`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ function Conversations({ token, onLogout }) {
     if (!confirmDelete) return
 
     try {
-      const response = await fetch(`http://localhost:8000/api/messages/conversations/${conversationId}`, {
+      const response = await fetch(`${API_URL}/messages/conversations/${conversationId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

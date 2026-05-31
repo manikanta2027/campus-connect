@@ -1,6 +1,7 @@
 // useNotifications - Custom hook for managing real-time notifications
 import { useState, useEffect, useCallback, useRef } from 'react';
 import io from 'socket.io-client';
+import API_URL from '../config/api';
 
 let socket = null;
 
@@ -15,9 +16,9 @@ export const useNotifications = (userEmail, token) => {
     if (!userEmail || !token) return;
 
     // Connect to socket server
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+    const socketUrl = API_URL.replace('/api', '');
     if (!socket) {
-      socket = io(apiUrl, {
+      socket = io(socketUrl, {
         auth: { token },
         reconnection: true,
         reconnectionDelay: 1000,

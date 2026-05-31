@@ -72,7 +72,7 @@ function MentorChat({ token, onLogout }) {
       console.log('📥 Fetching messages for conversation:', conversationId)
       
       const response = await fetch(
-        `http://localhost:8000/api/messages/conversations/${conversationId}/messages`,
+        `${API_URL}/messages/conversations/${conversationId}/messages`,
         {
           method: 'GET',
           headers: {
@@ -102,7 +102,7 @@ function MentorChat({ token, onLogout }) {
   const fetchMessages = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/messages/conversations/${conversationId}/messages`,
+        `${API_URL}/messages/conversations/${conversationId}/messages`,
         {
           method: 'GET',
           headers: {
@@ -129,7 +129,7 @@ function MentorChat({ token, onLogout }) {
     try {
       setError('')
       
-      const response = await fetch(`http://localhost:8000/api/messages/messages/${messageId}`, {
+      const response = await fetch(`${API_URL}/messages/messages/${messageId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -161,7 +161,7 @@ function MentorChat({ token, onLogout }) {
     try {
       setError('')
       
-      const response = await fetch(`http://localhost:8000/api/messages/messages/${messageId}`, {
+      const response = await fetch(`${API_URL}/messages/messages/${messageId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -206,7 +206,7 @@ function MentorChat({ token, onLogout }) {
 
       console.log('📤 Sending message...')
       
-      const response = await fetch('http://localhost:8000/api/messages/send', {
+      const response = await fetch(`${API_URL}/messages/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

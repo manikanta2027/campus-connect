@@ -72,11 +72,9 @@ function ForgotPassword() {
     setLoading(true)
 
     try {
-      // Get API URL from environment or use default
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000'
-
+      // Get API URL from environment
       // Send forgot password request to backend
-      const response = await axios.post(`${apiUrl}/api/auth/forgot-password`, {
+      const response = await axios.post(`${API_URL}/auth/forgot-password`, {
         email: email.toLowerCase().trim(),
         // Send current deployment URL so backend knows where to send the reset link
         frontendUrl: window.location.origin,

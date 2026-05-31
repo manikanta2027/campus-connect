@@ -38,7 +38,7 @@ function MentorsList({ token, onLogout }) {
       setLoading(true)
       setError('')
 
-      const response = await fetch('http://localhost:8000/api/mentors', {
+      const response = await fetch(`${API_URL}/mentors`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ function MentorsList({ token, onLogout }) {
         return
       }
 
-      const response = await fetch(`http://localhost:8000/api/mentors/skill/${skill}`, {
+      const response = await fetch(`${API_URL}/mentors/skill/${skill}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ function MentorsList({ token, onLogout }) {
     try {
       setError('')
 
-      const response = await fetch('http://localhost:8000/api/messages/conversations/start', {
+      const response = await fetch(`${API_URL}/messages/conversations/start`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
