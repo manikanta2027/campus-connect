@@ -45,7 +45,32 @@ const app = express();
 app.use(express.json());
 
 // Middleware - allow requests from frontend
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://campus-connect-bgkr.onrender.com',
+  process.env.FRONTEND_URL || 'http://localhost:3000'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
+// Security headers for CSP
+app.use((req, res, next) => {
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https:"
+  );
+  next();
+});
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -145,7 +170,7 @@ const startServer = async () => {
     // Initialize Socket.io with CORS settings
     const io = socketIO(httpServer, {
       cors: {
-        origin: 'http://localhost:3000', // Frontend URL
+        origin: allowedOrigins,
         methods: ['GET', 'POST'],
         credentials: true,
       },
