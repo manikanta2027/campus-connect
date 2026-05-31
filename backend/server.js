@@ -73,6 +73,15 @@ app.use((req, res, next) => {
 });
 
 // Routes
+// Root route
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Campus Connect API Server',
+    status: 'running',
+    version: '1.0.0'
+  });
+});
+
 app.use('/api/auth', authRoutes);
 // Use upload routes for image uploads
 app.use('/api/upload', uploadRoutes);
