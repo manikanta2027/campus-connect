@@ -1,4 +1,4 @@
-import API_URL from './api';
+import API_URL from '../config/api';
 
 /**
  * Wrapper for fetch API that automatically prepends the API URL
