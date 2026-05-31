@@ -90,7 +90,7 @@ function AdminDashboard({ token, onLogout }) {
   useEffect(() => {
     try {
       setLoading(true)
-      fetch('/api/events')
+      apiFetch('/events')
         .then(res => res.json())
         .then(data => {
           if (data.success && data.events) {
@@ -289,7 +289,7 @@ function AdminDashboard({ token, onLogout }) {
         formData.append('image', eventForm.eventImage)
 
         try {
-          const uploadResponse = await fetch('/api/upload/post', {
+          const uploadResponse = await apiFetch('/upload/post', {
             method: 'POST',
             body: formData,
             headers: {
@@ -321,7 +321,7 @@ function AdminDashboard({ token, onLogout }) {
       }
 
       // Send event to backend
-      const response = await fetch('/api/events', {
+      const response = await apiFetch('/events', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -404,7 +404,7 @@ function AdminDashboard({ token, onLogout }) {
         formData.append('image', eventForm.eventImage)
 
         try {
-          const uploadResponse = await fetch('/api/upload/post', {
+          const uploadResponse = await apiFetch('/upload/post', {
             method: 'POST',
             body: formData,
             headers: {
@@ -439,7 +439,7 @@ function AdminDashboard({ token, onLogout }) {
       }
 
       // Send update request to backend
-      const response = await fetch(`/api/events/${editingEventId}`, {
+      const response = await apiFetch(`/events/${editingEventId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -490,7 +490,7 @@ function AdminDashboard({ token, onLogout }) {
     if (window.confirm('Are you sure you want to delete this event? This action cannot be undone.')) {
       try {
         // Send delete request to backend
-        const response = await fetch(`/api/events/${eventId}`, {
+        const response = await apiFetch(`/events/${eventId}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
@@ -1051,3 +1051,4 @@ function AdminDashboard({ token, onLogout }) {
 }
 
 export default AdminDashboard
+

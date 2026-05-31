@@ -236,7 +236,7 @@ function Profile({ token, onLogout }) {
     const fetchUserPosts = async () => {
       try {
         // Fetch posts from backend API for the correct user
-        const response = await fetch(`/api/posts/user/${emailToFetchPostsFor}`)
+        const response = await apiFetch(`/posts/user/${emailToFetchPostsFor}`)
         const data = await response.json()
 
         if (data.success && data.posts.length > 0) {
@@ -323,7 +323,7 @@ function Profile({ token, onLogout }) {
   const fetchConversations = async () => {
     try {
       setLoadingMessages(true)
-      const response = await fetch('/api/messages/conversations', {
+      const response = await apiFetch('/messages/conversations', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -349,7 +349,7 @@ function Profile({ token, onLogout }) {
     
     try {
       // Start a conversation with the target user using their email
-      const response = await fetch('/api/messages/conversations/start', {
+      const response = await apiFetch('/messages/conversations/start', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -382,7 +382,7 @@ function Profile({ token, onLogout }) {
 
     try {
       // Delete from backend API
-      const response = await fetch(`/api/posts/${postId}`, {
+      const response = await apiFetch(`/posts/${postId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -419,7 +419,7 @@ function Profile({ token, onLogout }) {
       const post = userPosts.find(p => p.id === postId);
 
       // Update on backend API
-      const response = await fetch(`/api/posts/${postId}`, {
+      const response = await apiFetch(`/posts/${postId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -468,7 +468,7 @@ function Profile({ token, onLogout }) {
 
     // If not expanded, fetch comments from backend
     try {
-      const response = await fetch(`/api/comments/${postId}`)
+      const response = await apiFetch(`/comments/${postId}`)
       const data = await response.json()
       
       if (data.success) {
@@ -508,7 +508,7 @@ function Profile({ token, onLogout }) {
       console.log('Adding comment:', { postId, text: commentText, author: userName, userEmail })
 
       // Send comment to backend API
-      const response = await fetch('/api/comments', {
+      const response = await apiFetch('/comments', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -533,7 +533,7 @@ function Profile({ token, onLogout }) {
         }))
 
         // Refetch comments from backend to show the new comment
-        const commentsResponse = await fetch(`/api/comments/${postId}`)
+        const commentsResponse = await apiFetch(`/comments/${postId}`)
         const commentsData = await commentsResponse.json()
 
         if (commentsData.success) {
@@ -575,7 +575,7 @@ function Profile({ token, onLogout }) {
   // Function to refresh and fetch latest comments for a post
   const refreshComments = async (postId) => {
     try {
-      const response = await fetch(`/api/comments/${postId}`)
+      const response = await apiFetch(`/comments/${postId}`)
       const data = await response.json()
       
       if (data.success) {
@@ -606,7 +606,7 @@ function Profile({ token, onLogout }) {
 
     try {
       // Send like update to backend API
-      const response = await fetch(`/api/posts/${postId}/like`, {
+      const response = await apiFetch(`/posts/${postId}/like`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -691,7 +691,7 @@ function Profile({ token, onLogout }) {
       
       // Save to backend
       const token = sessionStorage.getItem('token');
-      const response = await fetch('/api/auth/profile', {
+      const response = await apiFetch('/auth/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -740,7 +740,7 @@ function Profile({ token, onLogout }) {
         formData.append('image', file);
 
         // Send POST request to backend upload endpoint
-        const response = await fetch('/api/upload/profile', {
+        const response = await apiFetch('/upload/profile', {
           method: 'POST',
           body: formData,
           // Add JWT token for authentication
@@ -812,7 +812,7 @@ function Profile({ token, onLogout }) {
         formData.append('image', file);
 
         // Upload to backend API
-        const response = await fetch('/api/upload/post', {
+        const response = await apiFetch('/upload/post', {
           method: 'POST',
           body: formData,
           headers: {
@@ -895,7 +895,7 @@ function Profile({ token, onLogout }) {
       }
 
       // Save post to backend API
-      const response = await fetch('/api/posts', {
+      const response = await apiFetch('/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1599,3 +1599,4 @@ function Profile({ token, onLogout }) {
 }
 
 export default Profile
+
