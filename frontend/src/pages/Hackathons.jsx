@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 // Import SearchBar component for global search
 import SearchBar from '../components/SearchBar'
+// Import API fetch helper
+import apiFetch from '../utils/apiFetch'
 
 function Hackathons({ token, onLogout }) {
   // useNavigate hook to navigate to different pages
@@ -23,7 +25,7 @@ function Hackathons({ token, onLogout }) {
     try {
       setLoading(true)
       // Fetch events from the backend API
-      fetch('/api/events')
+      apiFetch('/events')
         .then(res => res.json())
         .then(data => {
           if (data.success && data.events) {

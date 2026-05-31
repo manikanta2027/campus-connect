@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import API_URL from '../config/api'
+import apiFetch from '../utils/apiFetch'
 
 function NewsAdmin({ token, onLogout }) {
   const navigate = useNavigate()
@@ -144,7 +145,7 @@ function NewsAdmin({ token, onLogout }) {
     formData.append('image', file)
 
     try {
-      const uploadResponse = await fetch('/api/upload/post', {
+      const uploadResponse = await apiFetch('/upload/post', {
         method: 'POST',
         body: formData,
         headers: {

@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import SearchBar from '../components/SearchBar'
 // Import API configuration
 import API_URL from '../config/api'
+// Import API fetch helper
+import apiFetch from '../utils/apiFetch'
 
 function AdminDashboard({ token, onLogout }) {
   // useNavigate hook to navigate to different pages

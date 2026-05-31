@@ -142,7 +142,7 @@ function Profile({ token, onLogout }) {
       if (!isViewingAnotherUser) {
         // Viewing own profile - fetch from backend using email
         try {
-          const response = await fetch(`/api/auth/user/${encodeURIComponent(userEmail)}`);
+          const response = await apiFetch(`/auth/user/${encodeURIComponent(userEmail)}`);
           const data = await response.json();
           
           if (data.success && data.user) {
