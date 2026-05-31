@@ -9,9 +9,14 @@ export default defineConfig({
     proxy: {
       // Proxy API requests to backend (port 8000)
       '/api': {
-        target: 'http://localhost:8000',
+        target: process.env.VITE_API_URL || 'http://localhost:8000',
         changeOrigin: true,
       }
     }
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: false,
+    minify: 'terser'
   }
 })
