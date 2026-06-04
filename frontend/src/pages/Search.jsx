@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 // Import SearchBar component for search functionality
 import SearchBar from '../components/SearchBar'
+// Import API URL from config
+import API_URL from '../config/api'
 
 function Search({ token, onLogout }) {
   // useNavigate hook to navigate between pages
