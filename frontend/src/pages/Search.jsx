@@ -129,12 +129,13 @@ function Search({ token, onLogout }) {
       const allPostsData = await allPostsResponse.json()
       const lowerQuery = query.toLowerCase()
 
-      // Filter posts by content or author name
+      // Filter posts by content, author name, OR tags
       const filtered = allPostsData.posts?.filter(post => {
-        return (
-          post.content?.toLowerCase().includes(lowerQuery) ||
-          post.authorName?.toLowerCase().includes(lowerQuery)
-        )
+        const contentMatch = post.content?.toLowerCase().includes(lowerQuery)
+        const authorMatch = post.authorName?.toLowerCase().includes(lowerQuery)
+        const tagsMatch = post.tags?.some(tag => tag?.toLowerCase().includes(lowerQuery))
+        
+        return contentMatch || authorMatch || tagsMatch
       }) || []
 
       console.log(`✅ Found ${filtered.length} posts by content/author search`)
