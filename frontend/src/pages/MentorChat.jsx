@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import API_URL from '../config/api'
 
 function MentorChat({ token, onLogout }) {
   // Router hooks

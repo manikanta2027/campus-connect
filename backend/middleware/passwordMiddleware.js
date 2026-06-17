@@ -1,5 +1,5 @@
 // Import bcryptjs for password hashing
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs'); //bcrypt.js is a javascript library used to password hashing
 
 // Middleware to hash password before saving to database
 const hashPasswordMiddleware = async (password) => {
