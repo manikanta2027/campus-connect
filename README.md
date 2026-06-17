@@ -4,7 +4,7 @@ A comprehensive social networking platform designed for campus communities. Conn
 
 ## Features
 
-- **User Authentication**: Secure registration and login with OTP verification
+- **User Authentication**: Secure registration and login email and password
 - **Social Feed**: Share posts with multimedia support and community engagement
 - **Mentorship System**: Connect students with mentors for guidance and knowledge sharing
 - **Real-time Messaging**: Direct messaging with real-time chat capabilities
