@@ -1,6 +1,6 @@
 # Campus Connect
 
-A comprehensive social networking platform designed for campus communities. Connect with students, participate in events, share knowledge through mentorship, and stay updated with campus news.
+A comprehensive social networking platform designed for campus communities. Connect with students, participate in events, share knowledge through mentorship, and find skilled team members in hacktons.
 
 ## Features
 
