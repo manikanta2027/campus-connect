@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import API_URL from '../config/api'
 
 function Conversations({ token, onLogout }) {
   // Router hook
